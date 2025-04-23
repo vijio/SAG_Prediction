@@ -1,0 +1,41 @@
+# Model parameters
+latent_dim: 100
+generator:
+  hidden_dims: [256, 512, 1024]
+  activation: leaky_relu
+  dropout: 0.3
+
+discriminator:
+  hidden_dims: [1024, 512, 256]
+  activation: leaky_relu
+  spectral_norm: true
+
+# Training parameters
+batch_size: 64
+epochs: 500
+learning_rate: 0.0002
+beta1: 0.5
+beta2: 0.999
+
+# Dataset specific
+phm2010:
+  seq_length: 2000
+  sensor_channels: 7
+  normalization: minmax
+
+cmapss:
+  fd_number: 001
+  window_size: 50
+  stride: 10
+
+# Loss configuration
+loss:
+  adversarial: wasserstein
+  gradient_penalty_weight: 10.0
+  feature_matching_weight: 0.1
+
+# Evaluation
+metrics:
+  - fid
+  - mmd
+  - classification_accuracy
